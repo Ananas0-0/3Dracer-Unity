@@ -320,6 +320,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8859595994165869564, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
+      propertyPath: _assetId
+      value: 193694316
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7622813908850840044, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
     - {fileID: 5423768351183213818, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}

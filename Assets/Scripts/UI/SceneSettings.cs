@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneSettings : MonoBehaviour
 {
-    public GameObject pausePanel, winPanel, levelPanel, settingsPanel;
+    public GameObject pausePanel, winPanel, levelPanel, onlinePanel, hostPanel, joinPanel, settingsPanel;
+
     private void Update() {
         if (Input.GetKey(KeyCode.Escape)) { PauseButtonPressed(); }
         if (Input.GetKey(KeyCode.R)) { RestarButtonPressed(); }
@@ -29,9 +30,6 @@ public class SceneSettings : MonoBehaviour
         SceneTransition.SwitchToScene(0);
         Time.timeScale = 1.0f;
     }
-    public void ClosePanelButtonPressed(bool activeBtnSet) {
-        settingsPanel.SetActive(activeBtnSet);
-    }
     public void NextButtonPressed() {
         Time.timeScale = 1.0f;
         winPanel.SetActive(false);
@@ -42,9 +40,13 @@ public class SceneSettings : MonoBehaviour
         Debug.Log("Application Was Closed.");
     }
 
-    public void StartButtonPressed(bool activeBtn) {
-        levelPanel.SetActive(activeBtn);
-    }
+    public void StartButtonPressed(bool activeBtn) { levelPanel.SetActive(activeBtn); }
+    public void OnlineButtonPressed(bool activeBtn) { onlinePanel.SetActive(activeBtn); }
+    public void OpenHostPanel(bool activeBtn) { hostPanel.SetActive(activeBtn); }
+    public void OpenJoinPanel(bool activeBtn) { joinPanel.SetActive(activeBtn); }
+
+
+    public void ClosePanelButtonPressed(bool activeBtnSet) { settingsPanel.SetActive(activeBtnSet); }
 
     public void ResetButtonPressed() {
         // Удаляем все данные, сохраненные в PlayerPrefs
