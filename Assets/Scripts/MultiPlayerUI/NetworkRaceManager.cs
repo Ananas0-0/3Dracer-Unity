@@ -24,6 +24,7 @@ public class NetworkRaceManager : NetworkManager
         Vector3 pos;
         Quaternion rot;
 
+        // В меню — спавним в заранее заданные позиции
         if (SceneManager.GetActiveScene().name == "Menu")
         {
             Transform start = menuSpawnPoints[spawnIndex % menuSpawnPoints.Length];
@@ -34,26 +35,21 @@ public class NetworkRaceManager : NetworkManager
         }
         else
         {
+            // В игровой сцене — стандартные NetworkStartPosition
             Transform startPos = GetStartPosition();
+
             pos = startPos != null ? startPos.position : Vector3.zero;
             rot = startPos != null ? startPos.rotation : Quaternion.identity;
         }
 
         GameObject player = Instantiate(prefab, pos, rot);
-        if (SceneManager.GetActiveScene().name == "Menu")
-        {
-            Transform body = player.transform.Find("Body/Body");
 
-            if (body != null)
-                body.localScale *= 3f;
-        }
-
-        DisableLocalObjects(player);
+        DisableMenuOnlyObjects(player);
 
         NetworkServer.AddPlayerForConnection(conn, player);
     }
 
-    void DisableLocalObjects(GameObject player)
+    void DisableMenuOnlyObjects(GameObject player)
     {
         if (SceneManager.GetActiveScene().name != "Menu")
             return;
@@ -69,5 +65,12 @@ public class NetworkRaceManager : NetworkManager
 
         Transform miniMap = player.transform.Find("MiniMapCamera");
         if (miniMap) miniMap.gameObject.SetActive(false);
+    }
+
+    public override void OnServerDisconnect(NetworkConnectionToClient conn)
+    {
+        base.OnServerDisconnect(conn);
+
+        spawnIndex = Mathf.Max(0, spawnIndex - 1);
     }
 }

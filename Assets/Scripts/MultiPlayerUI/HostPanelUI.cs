@@ -52,4 +52,18 @@ public class HostPanelUI : MonoBehaviour
     }
 
     public void CreateHost() { NetworkManager.singleton.StartHost(); }
+
+    private void OnDisable() { ClearAllSlots(); }
+
+    public void ClearAllSlots()
+    {
+        foreach (var slot in previewSlots) { slot.ClearSlot(); }
+
+        currentPlayerCount = 0;
+    }
+    public void StopHost()
+    {
+        NetworkManager.singleton.StopHost();
+        ClearAllSlots();
+    }
 }
