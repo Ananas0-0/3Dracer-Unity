@@ -58,4 +58,21 @@ public class NetworkRaceManager : NetworkManager
 
         NetworkServer.AddPlayerForConnection(conn, player);
     }
+
+    public override void OnClientConnect()
+    {
+        base.OnClientConnect();
+
+        // Переключаем UI у клиента
+        LobbyMenuController.Instance?.ShowLobby();
+    }
+
+    // public override void OnStopHost()
+    // {
+    //     base.OnStopHost();
+
+    //     if (LobbyState.Instance != null)
+    //         LobbyState.Instance.RpcHostLeft();
+    // }
+
 }

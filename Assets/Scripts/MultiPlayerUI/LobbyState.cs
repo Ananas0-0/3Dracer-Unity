@@ -23,4 +23,10 @@ public class LobbyState : NetworkBehaviour
     {
         selectedMapIndex = index;
     }
+
+    [ClientRpc]
+    public void RpcHostLeft()
+    {
+        LobbyMenuController.Instance?.ShowMainMenu();
+    }
 }

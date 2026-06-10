@@ -1119,6 +1119,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 3365990737
       objectReference: {fileID: 0}
+    - target: {fileID: 3310871659393622075, guid: 9e360c625be0f9f47a7e78920c7251b5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3956967692746620612, guid: 9e360c625be0f9f47a7e78920c7251b5, type: 3}
       propertyPath: m_Name
       value: Renault Alpine A310 NEW
@@ -1126,6 +1130,10 @@ PrefabInstance:
     - target: {fileID: 3956967692746620612, guid: 9e360c625be0f9f47a7e78920c7251b5, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067677477425623562, guid: 9e360c625be0f9f47a7e78920c7251b5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6558805004429659349, guid: 9e360c625be0f9f47a7e78920c7251b5, type: 3}
       propertyPath: m_LocalScale.x
@@ -3379,6 +3387,8 @@ MonoBehaviour:
   mapSelectPanel: {fileID: 672612902}
   startButton: {fileID: 1217451087}
   levelSelector: {fileID: 672612908}
+  ipPanel: {fileID: 291269954}
+  ipText: {fileID: 1823636796}
 --- !u!1 &306227080
 GameObject:
   m_ObjectHideFlags: 0
@@ -20222,7 +20232,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your IP:'
+  m_text: 'IP:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21194,6 +21204,53 @@ RectTransform:
   m_AnchoredPosition: {x: 251, y: -35}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1902348472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1902348474}
+  - component: {fileID: 1902348473}
+  m_Layer: 0
+  m_Name: LobyMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1902348473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902348472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993ece8403a571046bf7f279ae672022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joinPanel: {fileID: 1371826520}
+  hostPanel: {fileID: 291269954}
+  onlineChoicePanel: {fileID: 186196344}
+--- !u!4 &1902348474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902348472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 992.76196, y: 523.4335, z: 0.00014896726}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1903010476
 GameObject:
   m_ObjectHideFlags: 0
@@ -23630,3 +23687,4 @@ SceneRoots:
   - {fileID: 1868708771}
   - {fileID: 793349954}
   - {fileID: 136649580}
+  - {fileID: 1902348474}
