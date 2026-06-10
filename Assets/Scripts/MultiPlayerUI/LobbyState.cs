@@ -22,6 +22,7 @@ public class LobbyState : NetworkBehaviour
     public void SetMap(int index)
     {
         selectedMapIndex = index;
+        LobbyUI.Instance?.UpdateMapPreview(index);
     }
 
     [ClientRpc]

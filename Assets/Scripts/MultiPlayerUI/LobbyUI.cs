@@ -14,7 +14,7 @@ public class LobbyUI : MonoBehaviour
         public GameObject root;
         public Image avatarImage;
         public TMP_Text nicknameText;
-        public GameObject crownIcon;
+        // public GameObject crownIcon;
     }
 
     [Header("Players")]
@@ -42,13 +42,6 @@ public class LobbyUI : MonoBehaviour
 
     void Start()
     {
-         // IP только для хоста
-        if (NetworkServer.active)
-        {
-            ipPanel.SetActive(true);
-            ipText.text = "IP: " + GetLocalIPAddress();
-        }
-        else { ipPanel.SetActive(false); }
         Debug.Log("Server active: " + NetworkServer.active);
 
         Refresh();
@@ -106,8 +99,8 @@ public class LobbyUI : MonoBehaviour
                         avatarSprites[players[i].avatarIndex];
                 }
 
-                if (slots[i].crownIcon != null)
-                    slots[i].crownIcon.SetActive(players[i].isServer);
+                // if (slots[i].crownIcon != null)
+                //     slots[i].crownIcon.SetActive(players[i].connectionToClient == null);
             }
             else
             {
@@ -121,26 +114,29 @@ public class LobbyUI : MonoBehaviour
     // ===== MAP SELECTION ===========
     // ===============================
 
-    public void SelectMap(int index)
+    public void OpenMapPanel()
     {
         if (!NetworkServer.active) return;
+        mapSelectPanel.SetActive(true);
+    }
+
+    public void SelectMap(int index)
+    {
+        Debug.Log("SelectMap called with index: " + index);
+
+        if (!NetworkServer.active)
+        {
+            Debug.Log("Not server, cannot change map");
+            return;
+        }
 
         LobbyState.Instance.SetMap(index);
-
-        if (index >= 0 && index < mapSprites.Length)
-            mapPreviewImage.sprite = mapSprites[index];
-
-        mapSelectPanel.SetActive(false);
+        if (mapSelectPanel != null)
+            mapSelectPanel.SetActive(false);
     }
 
     public void UpdateMapPreview(int index)
     {
-        if (levelSelector != null)
-        {
-            levelSelector.UpdatePanels(index);
-            levelSelector.UpdateButtons(index);
-        }
-
         if (index >= 0 && index < mapSprites.Length)
             mapPreviewImage.sprite = mapSprites[index];
     }
@@ -160,11 +156,9 @@ public class LobbyUI : MonoBehaviour
     {
         if (NetworkServer.active)
         {
-            // Сначала уведомляем клиентов
             if (LobbyState.Instance != null)
                 LobbyState.Instance.RpcHostLeft();
 
-            // Потом останавливаем сервер
             NetworkManager.singleton.StopHost();
         }
         else
@@ -173,5 +167,11 @@ public class LobbyUI : MonoBehaviour
         }
 
         LobbyMenuController.Instance?.ShowMainMenu();
+    }
+
+    public void OnHostStarted()
+    {
+        ipPanel.SetActive(true);
+        ipText.text = "IP: " + GetLocalIPAddress();
     }
 }

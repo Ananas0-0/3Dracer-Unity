@@ -4,57 +4,38 @@ using Mirror;
 
 public class LobbyLevelSelector : MonoBehaviour
 {
-    public GameObject[] levelPanels;
+    public GameObject[] pages; // levels(1), levels(2)
     public Button nextButton;
     public Button previousButton;
 
+    private int pageIndex = 0;
+
     void Start()
     {
-        UpdatePanels(LobbyState.Instance.selectedMapIndex);
-        UpdateButtons(LobbyState.Instance.selectedMapIndex);
-
-        bool isHost = NetworkServer.active;
-        nextButton.interactable = isHost;
-        previousButton.interactable = isHost;
+        UpdatePages();
     }
 
-    public void Next()
+    public void NextPage()
     {
-        if (!NetworkServer.active) return;
-
-        int index = LobbyState.Instance.selectedMapIndex;
-
-        if (index < levelPanels.Length - 1)
+        if (pageIndex < pages.Length - 1)
         {
-            LobbyState.Instance.SetMap(index + 1);
+            pageIndex++;
+            UpdatePages();
         }
     }
 
-    public void Previous()
+    public void PreviousPage()
     {
-        if (!NetworkServer.active) return;
-
-        int index = LobbyState.Instance.selectedMapIndex;
-
-        if (index > 0)
+        if (pageIndex > 0)
         {
-            LobbyState.Instance.SetMap(index - 1);
+            pageIndex--;
+            UpdatePages();
         }
     }
 
-    public void UpdatePanels(int index)
+    void UpdatePages()
     {
-        for (int i = 0; i < levelPanels.Length; i++)
-        {
-            levelPanels[i].SetActive(i == index);
-        }
-    }
-
-    public void UpdateButtons(int index)
-    {
-        bool isHost = NetworkServer.active;
-
-        nextButton.interactable = isHost && index < levelPanels.Length - 1;
-        previousButton.interactable = isHost && index > 0;
+        for (int i = 0; i < pages.Length; i++)
+            pages[i].SetActive(i == pageIndex);
     }
 }

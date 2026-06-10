@@ -67,12 +67,31 @@ public class NetworkRaceManager : NetworkManager
         LobbyMenuController.Instance?.ShowLobby();
     }
 
-    // public override void OnStopHost()
-    // {
-    //     base.OnStopHost();
+    public override void OnStartHost()
+    {
+        base.OnStartHost();
 
-    //     if (LobbyState.Instance != null)
-    //         LobbyState.Instance.RpcHostLeft();
-    // }
+        LobbyUI.Instance?.OnHostStarted();
+    }
+
+    public override void OnServerDisconnect(NetworkConnectionToClient conn)
+    {
+        base.OnServerDisconnect(conn);
+
+        StartCoroutine(DelayedRefresh());
+    }
+
+    private System.Collections.IEnumerator DelayedRefresh()
+    {
+        yield return null; // ждём 1 кадр
+        LobbyUI.Instance?.Refresh();
+    }
+
+    public override void OnClientDisconnect()
+    {
+        base.OnClientDisconnect();
+
+        LobbyMenuController.Instance?.ShowMainMenu();
+    }
 
 }
