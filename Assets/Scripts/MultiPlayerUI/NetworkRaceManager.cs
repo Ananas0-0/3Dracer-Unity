@@ -34,22 +34,28 @@ public class NetworkRaceManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
+        // В Menu создаём LobbyPlayer
         if (SceneManager.GetActiveScene().name == "Menu")
         {
             base.OnServerAddPlayer(conn);
             return;
         }
 
-        int carIndex = PlayerPrefs.GetInt("CurrentCar", 0);
+        int carIndex = 0;
+
+        if (conn.authenticationData != null)
+            carIndex = (int)conn.authenticationData;
 
         if (carIndex < 0 || carIndex >= playerCarPrefabs.Length)
             carIndex = 0;
 
         GameObject prefab = playerCarPrefabs[carIndex];
 
-        RaceGameManager gameManager = FindObjectOfType<RaceGameManager>();
+        LevelGameManager gameManager = FindObjectOfType<LevelGameManager>();
 
-        Transform spawnPoint = gameManager.GetRandomSpawnPoint();
+        Transform spawnPoint = gameManager != null
+            ? gameManager.GetNextSpawnPoint()
+            : null;
 
         Vector3 pos = spawnPoint != null ? spawnPoint.position : Vector3.zero;
         Quaternion rot = spawnPoint != null ? spawnPoint.rotation : Quaternion.identity;
@@ -62,6 +68,7 @@ public class NetworkRaceManager : NetworkManager
     public override void OnClientConnect()
     {
         base.OnClientConnect();
+        Debug.Log("Client connected");
 
         // Переключаем UI у клиента
         LobbyMenuController.Instance?.ShowLobby();
@@ -84,7 +91,8 @@ public class NetworkRaceManager : NetworkManager
     private System.Collections.IEnumerator DelayedRefresh()
     {
         yield return null;
-        if (LobbyUI.Instance != null);
+        if (LobbyUI.Instance != null)
+            LobbyUI.Instance.Refresh();
     }
 
     public override void OnClientDisconnect()
@@ -93,5 +101,5 @@ public class NetworkRaceManager : NetworkManager
 
         LobbyMenuController.Instance?.ShowMainMenu();
     }
-    
+
 }

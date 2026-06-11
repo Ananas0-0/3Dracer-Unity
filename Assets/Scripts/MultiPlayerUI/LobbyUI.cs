@@ -147,6 +147,7 @@ public class LobbyUI : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("Server active at StartGame: " + NetworkServer.active);
         if (!NetworkServer.active) return;
 
         ((NetworkRaceManager)NetworkManager.singleton).StartGame();
