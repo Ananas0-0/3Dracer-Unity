@@ -132,6 +132,14 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3078047756548201868, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078047756548201868, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3354142349280298665, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -329,11 +337,14 @@ PrefabInstance:
     - {fileID: 5423768351183213818, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
     - {fileID: 1283755471397880962, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
     - {fileID: 8859595994165869564, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
+    - {fileID: 8023438429999826151, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
+    - {fileID: -4055188795415012410, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6176842353894524769, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
     - {fileID: 3782903554774501569, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
     - {fileID: 5741212718443268399, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
     - {fileID: 5393736195120935988, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
+    - {fileID: 6373558271297633594, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6669554292654142903, guid: 051da80fe9e8f26448291fa051c0ba01, type: 3}

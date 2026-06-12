@@ -19,6 +19,7 @@ public class FinishLine : MonoBehaviour
     }
     
     private void OnTriggerEnter(Collider other) {
+        if (GameSession.CurrentMode == GameMode.MultiPlayer) return;
         if (other.CompareTag("Player") && !hasPlayerPassed)
         {
             // Обработка прохождения финишной линии игроком
